@@ -56,23 +56,3 @@ See `sample_portfolio.csv`.
 ```bash
 python -m pytest -q
 ```
-
-
-## UI (browser-based)
-
-A lightweight UI is available under `ui/` so you can test strategy creation visually.
-
-Run:
-
-```bash
-python -m http.server 8000
-```
-
-Then open `http://localhost:8000/ui/`.
-
-UI supports:
-
-- CSV upload (`symbol,asset_class,market_value`)
-- PAN input (mock data path)
-- Goal + risk + SIP inputs
-- Visual output of allocation, rebalance, and projection
