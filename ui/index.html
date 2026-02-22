@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolia UI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Portfolia</h1>
+      <p class="subtitle">Broker-agnostic portfolio strategy by goal.</p>
+
+      <section class="card">
+        <h2>Portfolio Source</h2>
+        <div class="row">
+          <label><input type="radio" name="source" value="file" checked /> CSV file</label>
+          <label><input type="radio" name="source" value="pan" /> PAN (mock)</label>
+        </div>
+
+        <div id="fileSource" class="row stacked">
+          <label for="csvFile">Upload CSV (`symbol,asset_class,market_value`)</label>
+          <input id="csvFile" type="file" accept=".csv,text/csv" />
+        </div>
+
+        <div id="panSource" class="row stacked hidden">
+          <label for="pan">PAN</label>
+          <input id="pan" type="text" placeholder="ABCDE1234F" maxlength="10" />
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Goal Inputs</h2>
+        <div class="grid">
+          <label>Goal name <input id="goal" value="Retirement" /></label>
+          <label>Target amount <input id="target" type="number" value="10000000" /></label>
+          <label>Years to goal <input id="years" type="number" value="15" min="1" /></label>
+          <label>Risk profile
+            <select id="risk">
+              <option>conservative</option>
+              <option selected>moderate</option>
+              <option>growth</option>
+              <option>aggressive</option>
+            </select>
+          </label>
+          <label>Monthly investment <input id="monthly" type="number" value="25000" min="0" /></label>
+        </div>
+      </section>
+
+      <button id="runBtn">Generate Strategy</button>
+      <p id="error" class="error"></p>
+
+      <section id="result" class="card hidden">
+        <h2>Recommendation</h2>
+        <div class="kpi-grid">
+          <div><strong>Current Value</strong><span id="kpiCurrent"></span></div>
+          <div><strong>Expected Annual Return</strong><span id="kpiReturn"></span></div>
+          <div><strong>Projected Value</strong><span id="kpiProjected"></span></div>
+          <div><strong>Goal Status</strong><span id="kpiTrack"></span></div>
+        </div>
+
+        <h3>Allocations (%)</h3>
+        <table>
+          <thead><tr><th>Asset</th><th>Current</th><th>Target</th><th>SIP</th><th>Rebalance Amount</th></tr></thead>
+          <tbody id="allocationRows"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
