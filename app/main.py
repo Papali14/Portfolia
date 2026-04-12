@@ -5,6 +5,7 @@ import json
 
 from app.ingestion import MockPanPortfolioProvider, load_holdings_from_csv
 from app.models import Goal
+from app.research import MarketResearchService, to_dict
 from app.strategy import StrategyEngine
 
 
@@ -30,6 +31,11 @@ def parse_args() -> argparse.Namespace:
         default=0.0,
         help="Planned monthly contribution",
     )
+    parser.add_argument(
+        "--include-research",
+        action="store_true",
+        help="Include data-backed security research (3Y/5Y history, financials, sentiment, position decision).",
+    )
     return parser.parse_args()
 
 
@@ -54,7 +60,12 @@ def main() -> None:
         monthly_investment=args.monthly_investment,
     )
 
-    print(json.dumps(recommendation.__dict__, indent=2))
+    response: dict = {"strategy": recommendation.__dict__}
+    if args.include_research:
+        research_items = MarketResearchService().analyze_portfolio(holdings)
+        response["research"] = [to_dict(item) for item in research_items]
+
+    print(json.dumps(response, indent=2))
 
 
 if __name__ == "__main__":

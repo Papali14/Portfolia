@@ -56,3 +56,46 @@ See `sample_portfolio.csv`.
 ```bash
 python -m pytest -q
 ```
+
+
+## UI (browser-based)
+
+A lightweight UI is available under `ui/` so you can test strategy creation visually.
+
+Run:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000/ui/`.
+
+UI supports:
+
+- CSV upload (`symbol,asset_class,market_value`)
+- PAN input (mock data path)
+- Goal + risk + SIP inputs
+- Visual output of allocation, rebalance, and projection
+
+
+## Data-backed research engine (no-options / no-trading)
+
+Use `--include-research` to add security-level research to the strategy output.
+
+```bash
+python -m app.main   --source-file sample_portfolio.csv   --goal "Retirement"   --target 20000000   --years 15   --risk growth   --monthly-investment 50000   --include-research
+```
+
+For each holding, the research block includes:
+
+- 3Y/5Y historical performance metrics (CAGR, volatility, max drawdown)
+- Financial snapshot (when available from the data provider)
+- News sentiment score from recent headlines
+- Position decision (`ACCUMULATE` / `HOLD` / `REDUCE`) with rationale
+- Explicit source URLs + data quality notes
+
+Guardrails:
+
+- The system only generates long-term position guidance.
+- It explicitly avoids options/intraday trading instructions.
+- Missing data is surfaced as missing (not fabricated).
