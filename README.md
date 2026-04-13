@@ -1,101 +1,50 @@
-# Portfolia: Broker-Agnostic Goal-Based Portfolio Strategy
+# Portfolia
 
-This project is a starter app that:
+Portfolia is a Next.js + React + TypeScript application for portfolio ingestion and analysis. Users upload broker Excel files and receive normalized holdings plus visual insights.
 
-1. Ingests a portfolio from **any broker export file (CSV)**, or
-2. Ingests via **PAN lookup** using a pluggable provider,
-3. Normalizes holdings into a common model,
-4. Generates a goal-based strategy (target allocation + rebalance + SIP guidance).
+## Current status
 
-## Why this design
-
-Broker data formats differ. The app converts all sources into one normalized schema:
-
-- `symbol`
-- `asset_class` (`equity`, `debt`, `gold`, `cash`)
-- `market_value`
-
-After normalization, strategy logic is source-independent.
+- Active stack: Next.js 14, React 18, TypeScript, Tailwind CSS, Recharts, `xlsx`
+- API-first ingestion flow using `app/api/process-portfolio/route.ts`
+- Browser UI for upload + analysis in `app/` and `components/`
+- Legacy Python docs and commands have been removed from this README
 
 ## Quick start
 
-```bash
-py -m app.main \
-  --source-file sample_portfolio.csv \
-  --goal "Child Education" \
-  --target 5000000 \
-  --years 10 \
-  --risk moderate \
-  --monthly-investment 30000
-```
+1. Use Node.js (recommended: `fnm use default` if your machine uses `fnm`).
+2. Install dependencies with `npm install`.
+3. Start the app with `npm run dev`.
+4. Open `http://localhost:3000`.
 
-Or via PAN (mock provider in this starter):
+## Scripts
 
-```bash
-py -m app.main \
-  --source-pan ABCDE1234F \
-  --goal "Retirement" \
-  --target 20000000 \
-  --years 18 \
-  --risk growth \
-  --monthly-investment 50000
-```
+- `npm run dev` starts development server
+- `npm run build` creates production build
+- `npm run start` runs production server
+- `npm run lint` runs lint checks
 
-## CSV format
+## Product flow
 
-The CSV must include these headers:
+1. User uploads `.xlsx` or `.xls` in the UI.
+2. `FileUpload` posts multipart form data to `POST /api/process-portfolio`.
+3. API parses workbook, detects relevant columns, infers asset class, and returns normalized holdings.
+4. `PortfolioAnalysis` renders totals, charts, and holdings table.
 
-- `symbol`
-- `asset_class`
-- `market_value`
+## Key directories
 
-See `sample_portfolio.csv`.
+- `app/` Next.js app router pages, layouts, and API routes
+- `components/` UI components
+- `tests/` sample input files used for manual verification
+- `codex/` agent prompts, plans, and process rules
 
-## Run tests
+## Documentation governance
 
-```bash
-py -m pytest -q
-```
+Agent and workflow documentation is maintained under `codex/`.
 
+- Shared cross-agent skills and context live in `docs/ai/`.
+- Start with [codex/AGENTS.md](codex/AGENTS.md)
+- Then load [docs/ai/README.md](docs/ai/README.md)
+- Follow [codex/process.md](codex/process.md) for mandatory docs-update rules
+- Use the templates in `codex/prompts/` and `codex/plans/`
 
-## UI (browser-based)
-
-A lightweight UI is available under `ui/` so you can test strategy creation visually.
-
-Run:
-
-```bash
-py -m http.server 8000
-```
-
-Then open `http://localhost:8000/ui/`.
-
-UI supports:
-
-- CSV upload (`symbol,asset_class,market_value`)
-- PAN input (mock data path)
-- Goal + risk + SIP inputs
-- Visual output of allocation, rebalance, and projection
-
-
-## Data-backed research engine (no-options / no-trading)
-
-Use `--include-research` to add security-level research to the strategy output.
-
-```bash
-py -m app.main   --source-file sample_portfolio.csv   --goal "Retirement"   --target 20000000   --years 15   --risk growth   --monthly-investment 50000   --include-research
-```
-
-For each holding, the research block includes:
-
-- 3Y/5Y historical performance metrics (CAGR, volatility, max drawdown)
-- Financial snapshot (when available from the data provider)
-- News sentiment score from recent headlines
-- Position decision (`ACCUMULATE` / `HOLD` / `REDUCE`) with rationale
-- Explicit source URLs + data quality notes
-
-Guardrails:
-
-- The system only generates long-term position guidance.
-- It explicitly avoids options/intraday trading instructions.
-- Missing data is surfaced as missing (not fabricated).
+Rule: if a code change alters behavior, architecture, API, testing approach, or developer workflow, the same change must update affected markdown before task completion.

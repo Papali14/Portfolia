@@ -2,26 +2,43 @@
 
 ## Purpose
 
-Use this prompt when you need help diagnosing a bug or fixing a failing test in Portfolia.
+Use this for root-cause diagnosis before or during a fix.
 
-## When to use
+## Required response contract
 
-- A unit test is failing in `tests/`
-- CLI output is incorrect or unstable
-- A function produces an unexpected error or exception
-- You need to isolate the root cause from repository context
+The agent response must include:
+
+- Reproduction strategy
+- Root-cause hypothesis (with evidence)
+- Confirmed cause
+- Safe fix recommendation
+- Documentation impact
 
 ## Prompt template
 
 ```markdown
-I have a bug in Portfolia. Here are the details:
-- failing test or error message
-- relevant file paths and function names
-- expected behavior
-- actual behavior
-Please describe the root cause, minimal repro steps, and a safe code fix.
+Help me debug a Portfolia issue.
+
+Context:
+- Symptom/error:
+- Expected behavior:
+- Observed behavior:
+- Affected files/modules:
+- Recent related changes:
+
+Please provide:
+1. Minimal repro steps
+2. Root-cause analysis path (what to inspect and why)
+3. Confirmed or most likely root cause
+4. Safe fix strategy and validation checks
+5. Documentation impact:
+   - Which markdown should be updated if fix changes behavior/workflow
+   - If none, explain why
 ```
 
-## Example request
+## Quality bar
 
-"Help me debug why `load_holdings_from_csv` raises `ValueError: Portfolio is empty.` for a CSV with valid headers. Show the root cause and test changes needed."
+- Separate hypothesis from confirmed facts.
+- Prefer deterministic repro over guess-based debugging.
+- Include what to monitor after deploying a fix.
+- Follow [process.md](../process.md) docs-sync rules.

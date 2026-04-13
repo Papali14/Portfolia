@@ -1,49 +1,62 @@
-# Feature X Plan
+# Feature Plan Template
 
 ## Summary
 
-Describe the feature or enhancement in one or two sentences.
+Describe the enhancement and expected outcome in one or two sentences.
 
-## Goals
+## Problem and goals
 
+- Problem statement
 - Primary goal
 - Secondary goals
-- Non-goals / out of scope
+- Non-goals
 
-## Background
+## Current-state context
 
-Explain why this feature is needed and how it fits Portfolia.
+- Existing behavior
+- Existing files/modules involved
+- Constraints (timeline, compatibility, performance)
 
 ## Scope
 
-### Includes
+### In scope
+
 - Item 1
 - Item 2
 
-### Excludes
+### Out of scope
+
 - Item 1
 - Item 2
 
-## Implementation approach
+## Architecture and design decisions
 
-- Modules/files to update
-- Data model or CLI changes
-- Any UI or static asset work
+- Component/module boundaries
+- Data flow changes
+- API contract changes (if any)
+- Tradeoffs and rejected alternatives
 
-## Testing
+## Implementation plan
 
-- Unit tests to add or update
-- End-to-end scenarios if applicable
-- Validation for input, output, and error conditions
+- File-level changes
+- Migration/backward compatibility notes
+- Error handling and edge cases
 
-## Risks
+## Verification plan
 
-- Known risks or edge cases
-- Compatibility concerns
-- Performance or UX tradeoffs
+- Unit tests
+- Integration tests
+- Manual validation steps
+- Monitoring/observability checks (if applicable)
 
-## Notes
+## Documentation impact (mandatory)
 
-- Related docs or references
-- Follow-up items
-- Deployment or release considerations
+- Markdown files to update in this same task
+- Why each update is needed
+- If no docs update is required, explicit justification
+
+## Risks and rollback
+
+- Known risks
+- Rollback strategy
+- Follow-up tasks

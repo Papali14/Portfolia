@@ -2,27 +2,43 @@
 
 ## Purpose
 
-Use this prompt when you want a design review, architecture recommendation, or system-level guidance for Portfolia.
+Use this for architecture reviews, system design decisions, and module boundary discussions in Portfolia.
 
-## When to use
+## Required response contract
 
-- Designing a new feature or extension
-- Reviewing the current `app/` structure and separation of concerns
-- Validating whether a change fits the existing model and normalization flow
-- Suggesting improvements for testability or maintainability
+The agent response must include:
+
+- Current-state summary
+- Proposed architecture
+- Tradeoffs and alternatives
+- Risks and mitigation
+- Validation approach
+- Documentation impact
 
 ## Prompt template
 
 ```markdown
-I need an architecture review for Portfolia, a Python starter app for goal-based portfolio strategy.
-The repo has `app/` for backend logic, `tests/` for unit coverage, and `ui/` for static browser assets.
-Please analyze the current design and suggest:
-- whether package boundaries are clear
-- whether the CLI model and data normalization flow are appropriate
-- any improvements for maintainability or future extension
-- any risks or anti-patterns to avoid
+I need an architecture review for Portfolia (Next.js + React + TypeScript).
+
+Context:
+- Task goal:
+- Current files/modules involved:
+- Constraints (performance, timeline, compatibility):
+
+Please provide:
+1. Current-state architecture assessment
+2. Proposed target design and why
+3. Tradeoffs and rejected alternatives
+4. Risks, edge cases, and rollback strategy
+5. Validation plan (tests/manual checks)
+6. Documentation impact:
+   - Which markdown files must be updated now
+   - If none, explain why
 ```
 
-## Example request
+## Quality bar
 
-"Review the existing Portfolia architecture and describe how `app.ingestion`, `app.strategy`, and `app.research` should interact. Suggest a clean way to add a new `tax` module without breaking current tests."
+- Prefer incremental evolution over broad rewrites.
+- Keep contracts explicit between UI, API, and data processing.
+- Call out coupling, hidden state assumptions, and migration risks.
+- Follow [process.md](../process.md) docs-sync rules.

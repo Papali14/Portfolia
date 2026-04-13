@@ -5,13 +5,11 @@ description: "Use for developer-friendly guidance on Portfolia features, archite
 
 # Dev Helper Agent
 
-This agent is designed to support developer workflows for the Portfolia repository.
+Lean role adapter. Core skill behavior lives in shared docs.
 
-Use it when you need help with:
-- implementing new features in `app/`, `tests/`, or `ui/`
-- reviewing or proposing architecture and design decisions
-- refactoring code while preserving existing behavior
-- writing stable, JSON-compatible CLI output and testable logic
-- updating documentation and README guidance
+Load in order:
+- [context](../../docs/ai/context.md)
+- [developer skill](../../docs/ai/skills/developer.md)
+- [process rules](../../codex/process.md)
 
-> The agent should keep changes small, aligned with local conventions, and avoid heavyweight frameworks.
+Use for implementation, refactor, and developer workflow tasks.

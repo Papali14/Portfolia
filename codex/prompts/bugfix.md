@@ -2,26 +2,43 @@
 
 ## Purpose
 
-Use this prompt for future bug fixes and regression work in Portfolia.
+Use this for regression fixes and production bug corrections with minimal blast radius.
 
-## When to use
+## Required response contract
 
-- a test fails unexpectedly
-- CLI behavior no longer matches the README
-- data validation or edge-case handling breaks
-- you want to add a regression test for a bug
+The agent response must include:
+
+- Problem statement and severity
+- Root cause
+- Minimal safe fix
+- Regression coverage
+- Documentation impact
 
 ## Prompt template
 
 ```markdown
-I need a bug fix for Portfolia.
-Provide:
-- the failing behavior or test
-- the expected behavior
-- the minimal code change
-- the regression test to add or update
+I need a bug fix in Portfolia.
+
+Bug details:
+- Actual behavior:
+- Expected behavior:
+- Error/logs:
+- Repro steps:
+- Suspected files:
+
+Please provide:
+1. Root cause analysis
+2. Minimal code fix
+3. Regression test(s) to prevent recurrence
+4. Risk assessment and side effects
+5. Documentation impact:
+   - Which markdown files must be updated now
+   - If none, justify no docs change
 ```
 
-## Example request
+## Quality bar
 
-"Fix the bug where `MockPanPortfolioProvider.fetch_holdings` accepts a PAN shorter than 10 characters. Include a regression test and a short explanation."
+- Prioritize correctness and low-risk patching.
+- Add or update regression tests whenever feasible.
+- Document assumptions when full validation is not possible.
+- Follow [process.md](../process.md) docs-sync rules.

@@ -1,26 +1,43 @@
-# Portfolia Codex: Agent Reference
+# Portfolia Agent Operating Model
 
-This codex describes workspace agents and prompt guides for Portfolia.
+This file defines the operating model and points to shared role skills that are agent-agnostic.
 
-## Agents
+## Core principles
 
-- `dev-helper` — Developer assistance for features, architecture, refactoring, testing, and documentation.
-- `bugfix` — Bug triage and fix workflows, with a test-first mindset and minimal safe changes.
-- `run` — Start Portfolia locally for development, including CLI execution and UI static hosting.
+- Keep changes small, verifiable, and production-safe.
+- Prefer behavior-preserving refactors unless a behavior change is explicitly requested.
+- Provide evidence: list what was changed, how it was verified, and what remains risky.
+- Update docs in the same task whenever behavior or workflow changes.
 
-## How to use
+## Shared skills
 
-1. Open a new chat or agent session.
-2. Reference the agent by name or ask for the corresponding task:
-   - `Use the dev-helper agent to implement a new feature in app/main.py`
-   - `Use the bugfix agent to diagnose a failing test and propose a fix`
-3. Keep requests focused and include relevant repository context when possible.
+All agents must load the shared context and the role skill from `docs/ai/`:
 
-## Codex structure
+- Context: [docs/ai/context.md](../docs/ai/context.md)
+- Architect skill: [docs/ai/skills/architect.md](../docs/ai/skills/architect.md)
+- Developer skill: [docs/ai/skills/developer.md](../docs/ai/skills/developer.md)
+- Tester skill: [docs/ai/skills/tester.md](../docs/ai/skills/tester.md)
 
-- `codex/prompts/` — prompt templates for architecture, feature planning, debugging, refactoring, and bug fixes.
-- `codex/plans/` — planning templates for feature work.
+These are the canonical role instructions for Codex/Copilot and any future agent runtime.
 
-## Notes
+## Mandatory docs-sync rule
 
-These files are designed to make developer workflow more friendly and consistent. Use the agent definitions alongside the prompt guides to get practical, repo-specific recommendations.
+If a task changes any of the following, the same agent must update markdown in the same task:
+
+- Architecture or data flow
+- API contract or request/response behavior
+- Build/run/test commands
+- Error-handling expectations
+- Team workflow, coding standards, or Definition of Done
+
+Use [process.md](process.md) as the source of truth for this check.
+
+## Prompt sources
+
+- `codex/prompts/architecture.md`
+- `codex/prompts/feature.md`
+- `codex/prompts/bugfix.md`
+- `codex/prompts/debug.md`
+- `codex/prompts/refactor.md`
+
+Prompt guides define task-specific request/response structure. Role behavior comes from `docs/ai/skills/*`.

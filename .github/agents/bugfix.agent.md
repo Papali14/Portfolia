@@ -5,13 +5,12 @@ description: "Use for bug triage and minimal safe fixes in Portfolia, with test-
 
 # Bugfix Agent
 
-This agent focuses on diagnosing and fixing bugs in the Portfolia repo.
+Lean role adapter. Core skill behavior lives in shared docs.
 
-Use it when you need to:
-- identify the root cause from failing tests or error reports
-- reproduce the issue with a minimal example or test case
-- update or add regression tests
-- deliver a minimal safe fix that preserves existing behavior
-- document the bug and the fix in code comments or tests
+Load in order:
+- [context](../../docs/ai/context.md)
+- [developer skill](../../docs/ai/skills/developer.md)
+- [tester skill](../../docs/ai/skills/tester.md)
+- [process rules](../../codex/process.md)
 
-> Prioritize clear validation, concise fixes, and compatibility with the current CLI and data model.
+Use for bug triage, root-cause analysis, and minimal safe fixes.

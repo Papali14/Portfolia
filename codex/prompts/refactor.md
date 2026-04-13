@@ -2,26 +2,41 @@
 
 ## Purpose
 
-Use this prompt when you want to improve Portfolia code quality without changing behavior.
+Use this for behavior-preserving code quality improvements.
 
-## When to use
+## Required response contract
 
-- cleaning up duplicated logic
-- simplifying testable functions
-- reorganizing module responsibilities
-- making `app/`, `tests/`, or `ui/` easier to understand
+The agent response must include:
+
+- Refactor objective
+- Scope and non-goals
+- Behavior-preservation checks
+- Validation results
+- Documentation impact
 
 ## Prompt template
 
 ```markdown
-I want to refactor Portfolia with a behavior-preserving change.
-Focus on readability, small scope, and existing tests.
-Include:
-- the target files or functions
-- the reason for the refactor
-- verification steps or tests
+I want to refactor Portfolia without changing behavior.
+
+Refactor details:
+- Target files/modules:
+- Current pain points:
+- Constraints:
+
+Please provide:
+1. Refactor plan with minimal risk
+2. Specific code changes and rationale
+3. Behavior-preservation verification plan
+4. Residual risks
+5. Documentation impact:
+   - Which markdown files should be updated
+   - If none, justify no docs changes
 ```
 
-## Example request
+## Quality bar
 
-"Refactor `app.ingestion.load_holdings_from_csv` to improve validation and reduce nested logic, while keeping the current behavior and tests intact."
+- Do not mix refactor with feature creep.
+- Preserve public contracts and user-observable behavior.
+- Keep diffs understandable and test-backed.
+- Follow [process.md](../process.md) docs-sync rules.

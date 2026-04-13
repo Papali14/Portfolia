@@ -2,27 +2,47 @@
 
 ## Purpose
 
-Use this prompt to define, implement, and test new features in Portfolia.
+Use this for new feature development across UI, API, or data-processing layers.
 
-## When to use
+## Required response contract
 
-- Adding a new CLI option or goal type
-- Extending the portfolio ingestion flow
-- Improving output formatting or report generation
-- Building new UI support under `ui/`
+The agent response must include:
+
+- Feature summary and scope
+- Implementation plan
+- Files to change
+- Validation and tests
+- Documentation impact
 
 ## Prompt template
 
 ```markdown
-Help me add a new feature to Portfolia.
-Describe the change, the modifiers, and the tests required.
-Include:
-- a short summary of the feature
-- the files or modules to change
-- a minimal set of tests to validate behavior
-- any CLI or user-facing output considerations
+Help me implement a feature in Portfolia.
+
+Feature:
+- Goal:
+- User value:
+- In scope:
+- Out of scope:
+
+Implementation context:
+- Related files:
+- Data/API impact:
+- UI impact:
+
+Please deliver:
+1. Minimal implementation approach
+2. Exact file-level change plan
+3. Test plan (unit/integration/manual as applicable)
+4. Risks and fallback behavior
+5. Documentation impact:
+   - Which markdown files to update in this same task
+   - If none, why no update is needed
 ```
 
-## Example request
+## Quality bar
 
-"Add support for a `--currency` option to the CLI that formats the goal target and strategy output in the selected currency. Show the code changes and the new test cases."
+- Keep implementation incremental and reversible.
+- Preserve compatibility unless breaking change is explicitly approved.
+- Include edge-case handling and error messaging.
+- Follow [process.md](../process.md) docs-sync rules.
