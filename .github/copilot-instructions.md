@@ -6,8 +6,8 @@ description: |
 
 # Portfolia Workspace Instructions
 
-- This is a Python project. The primary CLI entrypoint is `python -m app.main`.
-- Run tests with `python -m pytest -q`.
+- This is a Python project. The primary CLI entrypoint is `py -m app.main`.
+- Run tests with `py -m pytest -q`.
 - Preserve the existing domain model and normalization flow:
   - `app.ingestion` loads broker CSVs or PAN-based portfolio data.
   - `app.models` defines portfolio holdings and goal objects.

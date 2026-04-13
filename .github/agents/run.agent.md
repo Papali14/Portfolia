@@ -15,7 +15,7 @@ Use it when you need:
 
 ## Typical commands
 
-- `python -m app.main --source-file sample_portfolio.csv --goal "Retirement" --target 2000000 --years 10 --risk moderate --monthly-investment 30000`
-- `python -m http.server 8000` and open `http://localhost:8000/ui/`
+- `py -m app.main --source-file sample_portfolio.csv --goal "Retirement" --target 2000000 --years 10 --risk moderate --monthly-investment 30000`
+- `py -m http.server 8000` and open `http://localhost:8000/ui/`
 
 > Keep local startup workflows simple and aligned with the repo README. Avoid introducing complex dev servers unless required.

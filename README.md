@@ -20,7 +20,7 @@ After normalization, strategy logic is source-independent.
 ## Quick start
 
 ```bash
-python -m app.main \
+py -m app.main \
   --source-file sample_portfolio.csv \
   --goal "Child Education" \
   --target 5000000 \
@@ -32,7 +32,7 @@ python -m app.main \
 Or via PAN (mock provider in this starter):
 
 ```bash
-python -m app.main \
+py -m app.main \
   --source-pan ABCDE1234F \
   --goal "Retirement" \
   --target 20000000 \
@@ -54,7 +54,7 @@ See `sample_portfolio.csv`.
 ## Run tests
 
 ```bash
-python -m pytest -q
+py -m pytest -q
 ```
 
 
@@ -65,7 +65,7 @@ A lightweight UI is available under `ui/` so you can test strategy creation visu
 Run:
 
 ```bash
-python -m http.server 8000
+py -m http.server 8000
 ```
 
 Then open `http://localhost:8000/ui/`.
@@ -83,7 +83,7 @@ UI supports:
 Use `--include-research` to add security-level research to the strategy output.
 
 ```bash
-python -m app.main   --source-file sample_portfolio.csv   --goal "Retirement"   --target 20000000   --years 15   --risk growth   --monthly-investment 50000   --include-research
+py -m app.main   --source-file sample_portfolio.csv   --goal "Retirement"   --target 20000000   --years 15   --risk growth   --monthly-investment 50000   --include-research
 ```
 
 For each holding, the research block includes:
